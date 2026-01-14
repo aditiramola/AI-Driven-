@@ -14,15 +14,15 @@ export const socket = io(SOCKET_URL, {
 
 // Connection event handlers for debugging
 socket.on("connect", () => {
-  console.log(`✅ WebSocket connected: ${socket.id}`);
+  console.log(` WebSocket connected: ${socket.id}`);
 });
 
 socket.on("disconnect", (reason) => {
-  console.log(`❌ WebSocket disconnected: ${reason}`);
+  console.log(` WebSocket disconnected: ${reason}`);
 });
 
 socket.on("connect_error", (error) => {
-  console.error("💥 WebSocket connection error:", error.message);
+  console.error(" WebSocket connection error:", error.message);
 });
 
 // Custom function to emit events

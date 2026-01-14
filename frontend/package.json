@@ -1,5 +1,4 @@
 {
-  "$schema": "https://json.schemastore.org/package",
   "name": "market-dashboard",
   "private": true,
   "version": "1.0.0",
