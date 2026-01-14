@@ -1,4 +1,4 @@
-# app.py - Updated
+# backend/app.py - UPDATED
 from flask import Flask
 from flask_socketio import SocketIO
 import time
@@ -9,23 +9,28 @@ from analyzer import analyze_asset
 app = Flask(__name__)
 socketio = SocketIO(app, cors_allowed_origins="*", async_mode="eventlet")
 
+# Add META to prices list
 prices = {
     "AAPL": 190,
     "MSFT": 410,
     "BTC-USD": 43000,
-    "ETH-USD": 2300
+    "ETH-USD": 2300,
+    "META": 412.29,  
+    "ETC": 2325.62   
 }
 
 signal_cache = {}
 
 def generate_realistic_signal(symbol, current_price):
     """Generate more realistic trade signals"""
-    # Market trends (simplified for demo)
+    # Market trends (simplified for demo) - Updated for all symbols
     trends = {
         "AAPL": {"base_volatility": 0.5, "trend": 0.1},
         "MSFT": {"base_volatility": 0.4, "trend": 0.08},
         "BTC-USD": {"base_volatility": 2.0, "trend": 0.5},
-        "ETH-USD": {"base_volatility": 1.8, "trend": 0.4}
+        "ETH-USD": {"base_volatility": 1.8, "trend": 0.4},
+        "META": {"base_volatility": 0.6, "trend": 0.12},  
+        "ETC": {"base_volatility": 1.5, "trend": 0.3}     
     }
     
     trend = trends.get(symbol, {"base_volatility": 1, "trend": 0})
@@ -104,4 +109,6 @@ def handle_get_signals(data):
     socketio.emit("signals_update", signals)
 
 if __name__ == "__main__":
+    print(" Starting WebSocket server with 6 assets:")
+    print("📈 Symbols: AAPL, MSFT, BTC-USD, ETH-USD, META, ETC")
     socketio.run(app, port=5000, debug=True)
